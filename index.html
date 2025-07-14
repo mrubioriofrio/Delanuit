@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DELANUITT - Artista de Reggaeton</title>
+    
+    <!-- Fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@700;800&family=Poppins:wght@300;400&family=Urbanist:wght@600;800&family=Permanent+Marker&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome para iconos sociales -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <!-- AOS (Animate On Scroll) -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    
+    <!-- Estilos personalizados -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+<body>
+    <!-- Sección superior con nombre del artista -->
+    <header class="hero">
+        <h1 class="artist-name" id="artist-name">DELANUIT</h1>
+    </header>
+            
+    <!-- Video del artista a pantalla completa -->
+    <div class="full-width-video-container">
+        <video id="artist-video" class="artist-video" autoplay loop playsinline muted preload="auto">
+            <source src="assets/images/cancion.mp4" type="video/mp4">
+            Tu navegador no soporta videos HTML5.
+        </video>
+        <div class="video-overlay"></div>
+        <div class="vinyl-disc-container" id="audio-toggle">
+            <img src="./assets/images/Sin título.png" alt="Disco" class="vinyl-disc-image">
+            <div class="sound-message">Haz clic para activar el sonido</div>
+        </div>
+    </div>
+    
+    <div class="container">
+
+        <!-- Sección de música -->
+        <section class="music-section" style="overflow: hidden;">
+            <div class="handwriting-container" data-aos="fade-up">
+                <h2 class="music-title">
+                    <span class="handwritten-letter">M</span>
+                    <span class="handwritten-letter">Ú</span>
+                    <span class="handwritten-letter">S</span>
+                    <span class="handwritten-letter">I</span>
+                    <span class="handwritten-letter">C</span>
+                    <span class="handwritten-letter">A</span>
+                    <span class="handwritten-letter space"> </span>
+                    <span class="handwritten-letter">D</span>
+                    <span class="handwritten-letter">E</span>
+                    <span class="handwritten-letter">S</span>
+                    <span class="handwritten-letter">T</span>
+                    <span class="handwritten-letter">A</span>
+                    <span class="handwritten-letter">C</span>
+                    <span class="handwritten-letter">A</span>
+                    <span class="handwritten-letter">D</span>
+                    <span class="handwritten-letter">A</span>
+                </h2>
+            </div>
+            
+            <!-- Contenedor de tarjetas en fila -->
+            <div class="streaming-cards-container" style="overflow: hidden;">
+                
+                <!-- Spotify Card con enlace real -->
+                <div class="streaming-card spotify-card" data-aos="fade-up" id="spotify-embed-container" data-platform-url="https://open.spotify.com/intl-es/album/5NTw40RIuOUwdctP6UZr4R">
+                <!-- El iframe o widget de Spotify se cargará aquí mediante JavaScript cuando sea necesario -->
+                <div class="card-header">
+                    <div class="album-cover">
+                        <img src="./assets/images/album-cover.svg" alt="DELANUIT - MENÚ DEL DÍA - EP" class="cover-image">
+                    </div>
+                    <div class="card-info">
+                        <h3>MENÚ DEL DÍA - EP</h3>
+                        <p class="artist-name-card">DELANUIT</p>
+                    </div>
+                </div>
+                
+                <div class="tracks-list" style="overflow: hidden; max-height: none;">
+                    <div class="track-item" data-track-url="https://open.spotify.com/track/0xLezW4NNuxXLtXgGYan3Z">
+                        <span class="track-number">1</span>
+                        <span class="track-name">ROCKSTAR</span>
+                        <span class="track-duration">3:05</span>
+                    </div>
+                    <div class="track-item" data-track-url="https://open.spotify.com/track/1j0r7SiShzH1o0IIXKiHm2">
+                        <span class="track-number">2</span>
+                        <span class="track-name">DEMONIA</span>
+                        <span class="track-duration">2:47</span>
+                    </div>
+                    <div class="track-item" data-track-url="https://open.spotify.com/track/1FosbD5O1PNOUJ67absQUj">
+                        <span class="track-number">3</span>
+                        <span class="track-name">ALMA CRIMINAL</span>
+                        <span class="track-duration">3:20</span>
+                    </div>
+                    <div class="track-item" data-track-url="https://open.spotify.com/track/7cnwNZDEhSIArvQ7SJdpSC">
+                        <span class="track-number">4</span>
+                        <span class="track-name">WET</span>
+                        <span class="track-duration">2:55</span>
+                    </div>
+                    <div class="track-item" data-track-url="https://open.spotify.com/track/2eikCeRJY4peTS5Gqs3XQL">
+                        <span class="track-number">5</span>
+                        <span class="track-name">CON OTRO CABRÓN</span>
+                        <span class="track-duration">3:15</span>
+                    </div>
+                    <div class="track-item" data-track-url="https://open.spotify.com/track/1UhUK6Cg87RIbxrhclCbFe">
+                        <span class="track-number">6</span>
+                        <span class="track-name">ESCUCHARME OTRA VEZ</span>
+                        <span class="track-duration">2:50</span>
+                    </div>
+                </div>
+                
+                <a href="https://open.spotify.com/intl-es/album/5NTw40RIuOUwdctP6UZr4R" class="platform-button spotify-button" id="spotify-main-link" target="_blank">
+                    <i class="fab fa-spotify"></i> Escuchar en Spotify
+                </a>
+            </div>
+                
+            <!-- Apple Music Card -->
+            <div class="streaming-card apple-card" data-aos="fade-up" data-aos-delay="200" id="apple-embed-container" data-platform-url="https://music.apple.com/es/artist/delanuit/1694315639">
+                <div class="card-header">
+                    <div class="apple-logo">
+                        <i class="fab fa-apple"></i> Music
+                    </div>
+                </div>
+                
+                <div class="tracks-list apple-tracks" style="overflow: hidden; max-height: none;">
+                    <div class="track-item" data-apple-track-url="https://music.apple.com/es/artist/delanuit/1694315639">
+                        <span class="track-number">1</span>
+                        <span class="track-name">ROCKSTAR</span>
+                    </div>
+                    <div class="track-item" data-apple-track-url="https://music.apple.com/es/artist/delanuit/1694315639">
+                        <span class="track-number">2</span>
+                        <span class="track-name">DEMONIA</span>
+                    </div>
+                    <div class="track-item" data-apple-track-url="https://music.apple.com/es/artist/delanuit/1694315639">
+                        <span class="track-number">3</span>
+                        <span class="track-name">ALMA CRIMINAL</span>
+                    </div>
+                    <div class="track-item" data-apple-track-url="https://music.apple.com/es/artist/delanuit/1694315639">
+                        <span class="track-number">4</span>
+                        <span class="track-name">WET</span>
+                    </div>
+                    <div class="track-item" data-apple-track-url="https://music.apple.com/es/artist/delanuit/1694315639">
+                        <span class="track-number">5</span>
+                        <span class="track-name">CON OTRO CABRÓN</span>
+                    </div>
+                    <div class="track-item" data-apple-track-url="https://music.apple.com/es/artist/delanuit/1694315639">
+                        <span class="track-number">6</span>
+                        <span class="track-name">ESCUCHARME OTRA VEZ</span>
+                    </div>
+                </div>
+                
+                <a href="https://music.apple.com/es/artist/delanuit/1694315639" class="platform-button apple-button" id="apple-music-link" target="_blank">
+                    Ver en la app <i class="fas fa-external-link-alt"></i>
+                </a>
+            </div>
+            
+            <!-- Amazon Card - Contenedor para enlaces múltiples -->
+            <div class="streaming-card amazon-card" data-aos="fade-up" data-aos-delay="400" id="amazon-links-container" data-platform-url="https://www.amazon.es/music/player/artists/B0BW8R684D/delanuit?ASIN=B0BW8R684D">
+                <div class="card-header">
+                    <div class="amazon-logo">
+                        <i class="fab fa-amazon"></i> Music
+                    </div>
+                </div>
+                
+                <div class="platforms-list" style="overflow: hidden; max-height: none;">
+                    <a href="https://open.spotify.com/intl-es/album/5NTw40RIuOUwdctP6UZr4R" class="platform-link" id="spotify-link" target="_blank">
+                        <i class="fab fa-spotify"></i> Spotify
+                        <span class="platform-action">Play</span>
+                    </a>
+                    <a href="https://music.apple.com/es/artist/delanuit/1694315639" class="platform-link" id="itunes-link" target="_blank">
+                        <i class="fab fa-apple"></i> iTunes Store
+                        <span class="platform-action">Descarga</span>
+                    </a>
+                    <a href="https://music.youtube.com/search?q=delanuit" class="platform-link" id="youtube-link" target="_blank">
+                        <i class="fab fa-youtube"></i> YouTube Music
+                        <span class="platform-action">Play</span>
+                    </a>
+                    <a href="https://tidal.com/search?q=delanuit" class="platform-link" id="tidal-link" target="_blank">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbD0ibm9uZSI+PHBhdGggZD0iTTEyLjA0IDJjLS45MjMgMC0xLjg0Ni4wNzktMi43NS4yNmEuNzUzLjc1MyAwIDAgMC0uNjM1Ljg2OC43NTMuNzUzIDAgMCAwIC44NzIuNjMyYy43NjYtLjE1OCAxLjU1OS0uMjMgMi4zNDgtLjIzIDMuOTYgMCA3LjczMyAxLjg2OSA5Ljk2OCA1LjA4NmEuNzUuNzUgMCAwIDAgMS4yOTkgMGMyLjIzNi0zLjIxNyA2LjAwOC01LjA4NiA5Ljk2OS01LjA4Ni43ODkgMCAxLjU4Mi4wNzIgMi4zNDkuMjNhLjc1My43NTMgMCAwIDAgLjg3MS0uNjMyLjc1My43NTMgMCAwIDAtLjYzNS0uODY3QTEyLjkxIDEyLjkxIDAgMCAwIDMyLjk2IDJDMjguNDEyIDIgMjQuMTIgNC4yNTcgMjEuNiA4SDEzLjRDMTAuODggNC4yNTcgNi41ODggMiAyLjA0IDJoMTBabTAgMTJjLTIuMjEgMC00LTEuNzktNC00czEuNzktNCA0LTQgNCAxLjc5IDQgNC0xLjc5IDQtNCA0Wm0wLTYuNWMtMS4zOCAwLTIuNSAxLjEyLTIuNSAyLjVzMS4xMiAyLjUgMi41IDIuNSAyLjUtMS4xMiAyLjUtMi41LTEuMTItMi41LTIuNS0yLjVaTTMgMTUuNTQzVjIyaDYuNDVBMTAuOTYgMTAuOTYgMCAwIDEgMyAxNS41NDNabTQzIDYuNDU3di02LjQ1N2E2LjQ3IDYuNDcgMCAwIDEtNiAxLjkxNyAxMC45ODggMTAuOTg4IDAgMCAxLTYuNDUgNC41NEg0NlYyMmgtOC40NWExMC45NiAxMC45NiAwIDAgMS02LjQ1LTQuNDU3QTYuNDcgNi40NyAwIDAgMSAyNSAxNS41NDN2Ni40NTdoMjFaIiBmaWxsPSIjMDAwIi8+PC9zdmc+" alt="Tidal" class="platform-icon">
+                        TIDAL
+                        <span class="platform-action">Play</span>
+                    </a>
+                    <a href="https://www.deezer.com/search/delanuit" class="platform-link" id="deezer-link" target="_blank">
+                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbD0ibm9uZSI+PHBhdGggZD0iTTAgMGgyNHYyNEgweiIvPjxwYXRoIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0wIDE4Yy00LjQyIDAtOC0zLjU4LTgtOHMzLjU4LTggOC04IDggMy41OCA4IDgtMy41OCA4LTggOHoiIGZpbGw9IiM2MDAyZWUiLz48cGF0aCBkPSJNOCA4aDN2OEg4eiIgZmlsbD0iIzYwMDJlZSIvPjxwYXRoIGQ9Ik0xNiA4aC0zbDIgNC41TDEzIDE2aDNsMi00LjV6IiBmaWxsPSIjNjAwMmVlIi8+PC9zdmc+" alt="Deezer" class="platform-icon">
+                        DEEZER
+                        <span class="platform-action">Play</span>
+                    </a>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Footer con iconos sociales -->
+        <footer>
+            <div class="social-icons">
+                <a href="#" class="social-icon" data-aos="fade-up" data-aos-delay="100"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="social-icon" data-aos="fade-up" data-aos-delay="200"><i class="fab fa-youtube"></i></a>
+                <a href="#" class="social-icon" data-aos="fade-up" data-aos-delay="300"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="social-icon" data-aos="fade-up" data-aos-delay="400"><i class="fab fa-tiktok"></i></a>
+            </div>
+            <p class="copyright" data-aos="fade-up" data-aos-delay="500">© 2025 DELANUITT · Todos los derechos reservados</p>
+        </footer>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script src="./assets/js/main.js"></script>
+</body>
+</html>
