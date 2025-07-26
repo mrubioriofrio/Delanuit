@@ -64,7 +64,13 @@ body {
     opacity: 0; /* Comenzará invisible para la animación */
     position: relative;
     z-index: 2;
-    text-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+    background: linear-gradient(45deg, #7adbdb, #7aa3db, #a796d9, #c1a3d3, #d1a3b8, #d1b29e, #d1c9a1, #b8d1a3);
+    background-size: 400% 400%;
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    -webkit-text-fill-color: transparent;
+    animation: colorChange 18s ease infinite, neon-glow-text 3s infinite alternate;
 }
 
 /* Video del artista a pantalla completa */
@@ -171,6 +177,21 @@ body {
     0% { background-position: 0% 50%; }
     50% { background-position: 100% 50%; }
     100% { background-position: 0% 50%; }
+}
+
+@keyframes colorChange {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes neon-glow-text {
+    from {
+        text-shadow: 0 0 8px rgba(122, 219, 219, 0.4), 0 0 12px rgba(122, 219, 219, 0.2);
+    }
+    to {
+        text-shadow: 0 0 10px rgba(122, 219, 219, 0.5), 0 0 18px rgba(122, 219, 219, 0.3), 0 0 25px rgba(122, 219, 219, 0.2);
+    }
 }
 
 .video-overlay {
@@ -460,7 +481,6 @@ text-align: center;
 .album-cover {
     width: 100px;
     height: 100px;
-    background: #333;
     margin-right: 20px;
     flex-shrink: 0;
     position: relative;
@@ -691,22 +711,127 @@ footer {
 }
 
 /* Adaptación para dispositivos móviles */
-@media (max-width: 768px) {
+/* Dispositivos pequeños (teléfonos, 576px y menos) */
+@media (max-width: 576px) {
     .artist-name {
-        font-size: clamp(3rem, 15vw, 6rem);
+        font-size: clamp(2.5rem, 12vw, 5rem);
+        letter-spacing: 4px;
     }
     
     .music-section {
-        padding: 60px 0;
+        padding: 30px 15px;
     }
     
-    .songs-container {
-        padding: 0 20px;
+    .handwriting-container {
+        padding: 0 10px;
     }
     
-    .spotify-button {
-        padding: 15px 30px;
+    .luna {
+        width: 100px; /* Luna aún más pequeña en móvil */
+        margin-bottom: 15px;
+    }
+    
+    .music-title {
+        font-size: 2rem;
+    }
+    
+    .handwritten-letter {
+        margin: 0 1px;
+    }
+    
+    .vinyl-disc-container {
+        min-width: 280px;
+        padding: 10px 15px;
+    }
+    
+    .sound-message {
+        font-size: 16px;
+    }
+    
+    .vinyl-disc-image {
+        width: 50px;
+        height: 50px;
+    }
+    
+    .streaming-card {
+        width: 90%;
+        margin: 0 auto 20px;
+    }
+    
+    .platform-button {
+        width: 90%;
+        margin: 0 auto;
+        padding: 12px 20px;
+        font-size: 0.9rem;
+    }
+    
+    .full-width-video-container {
+        height: 60vh;
+    }
+    
+    .track-item {
+        padding: 10px;
+    }
+}
+
+/* Dispositivos medianos (tablets, 768px y menos) */
+@media (min-width: 577px) and (max-width: 768px) {
+    .artist-name {
+        font-size: clamp(3rem, 13vw, 6rem);
+    }
+    
+    .music-section {
+        padding: 40px 20px;
+    }
+    
+    .luna {
+        width: 120px;
+    }
+    
+    .streaming-card {
+        width: 85%;
+        margin: 0 auto 25px;
+    }
+    
+    .platform-button {
+        padding: 15px 25px;
         font-size: 1rem;
+    }
+    
+    .full-width-video-container {
+        height: 70vh;
+    }
+}
+
+/* Ajustes generales para todos los dispositivos móviles */
+@media (max-width: 768px) {
+    .artist-name {
+        margin-top: 10px;
+    }
+    
+    body {
+        padding: 0;
+    }
+    
+    .container {
+        padding: 0 10px;
+    }
+    
+    .hero {
+        padding: 20px 0;
+    }
+    
+    .streaming-cards-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .social-icons {
+        gap: 15px;
+    }
+    
+    .social-icon {
+        font-size: 1.3rem;
     }
 }
 
@@ -723,4 +848,55 @@ footer {
     to {
         text-shadow: 0 0 15px #0ff, 0 0 25px #0ff, 0 0 35px #0ff;
     }
+}
+
+/* Estilos para los relámpagos */
+.lightning-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9999;
+    overflow: hidden;
+}
+
+.lightning {
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.8);
+    filter: drop-shadow(0 0 15px rgba(100, 220, 255, 0.8));
+    opacity: 0;
+    pointer-events: none;
+    z-index: 9999;
+}
+
+.lightning.main-bolt {
+    height: 5px;
+    transform-origin: left center;
+    filter: drop-shadow(0 0 20px rgba(100, 220, 255, 0.9));
+}
+
+.lightning.branch {
+    height: 3px;
+    transform-origin: left center;
+    filter: drop-shadow(0 0 15px rgba(100, 220, 255, 0.8));
+}
+
+@keyframes flash {
+    0% { opacity: 0; }
+    20% { opacity: 1; }
+    25% { opacity: 0; }
+    30% { opacity: 1; }
+    70% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* Estilo para la imagen de la luna */
+.luna {
+    width: 150px; /* Tamaño reducido */
+    height: auto;
+    border-radius: 50%; /* Hacer la imagen circular */
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.6); /* Efecto de brillo */
+    margin-bottom: 20px;
 }

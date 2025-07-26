@@ -20,6 +20,9 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
+    <!-- Contenedor para los relámpagos -->
+    <div class="lightning-container" id="lightning-container"></div>
+    
     <!-- Sección superior con nombre del artista -->
     <header class="hero">
         <h1 class="artist-name" id="artist-name">DELANUIT</h1>
@@ -41,8 +44,10 @@
     <div class="container">
 
         <!-- Sección de música -->
+        
         <section class="music-section" style="overflow: hidden;">
             <div class="handwriting-container" data-aos="fade-up">
+                <img src="./assets/images/full_moon_luc_viatour.jpg" alt="DELANUIT - MENÚ DEL DÍA - EP" class="luna">
                 <h2 class="music-title">
                     <span class="handwritten-letter">M</span>
                     <span class="handwritten-letter">Ú</span>
@@ -71,7 +76,7 @@
                 <!-- El iframe o widget de Spotify se cargará aquí mediante JavaScript cuando sea necesario -->
                 <div class="card-header">
                     <div class="album-cover">
-                        <img src="./assets/images/album-cover.svg" alt="DELANUIT - MENÚ DEL DÍA - EP" class="cover-image">
+                        <img src="./assets/images/image00003.jpeg" alt="DELANUIT - MENÚ DEL DÍA - EP" class="cover-image">
                     </div>
                     <div class="card-info">
                         <h3>MENÚ DEL DÍA - EP</h3>
@@ -112,7 +117,7 @@
                     </div>
                 </div>
                 
-                <a href="https://open.spotify.com/intl-es/album/5NTw40RIuOUwdctP6UZr4R" class="platform-button spotify-button" id="spotify-main-link" target="_blank">
+                <a href="https://open.spotify.com/intl-es/artist/4hZnhoA7owLVHCMJWFJe1G?si=vyjzTuxkROaO9Xfuw5qHUA" class="platform-button spotify-button" id="spotify-main-link" target="_blank">
                     <i class="fab fa-spotify"></i> Escuchar en Spotify
                 </a>
             </div>
@@ -166,7 +171,7 @@
                 </div>
                 
                 <div class="platforms-list" style="overflow: hidden; max-height: none;">
-                    <a href="https://open.spotify.com/intl-es/album/5NTw40RIuOUwdctP6UZr4R" class="platform-link" id="spotify-link" target="_blank">
+                    <a href="https://open.spotify.com/intl-es/artist/4hZnhoA7owLVHCMJWFJe1G?si=vyjzTuxkROaO9Xfuw5qHUA" class="platform-link" id="spotify-link" target="_blank">
                         <i class="fab fa-spotify"></i> Spotify
                         <span class="platform-action">Play</span>
                     </a>
@@ -178,16 +183,6 @@
                         <i class="fab fa-youtube"></i> YouTube Music
                         <span class="platform-action">Play</span>
                     </a>
-                    <a href="https://tidal.com/search?q=delanuit" class="platform-link" id="tidal-link" target="_blank">
-                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbD0ibm9uZSI+PHBhdGggZD0iTTEyLjA0IDJjLS45MjMgMC0xLjg0Ni4wNzktMi43NS4yNmEuNzUzLjc1MyAwIDAgMC0uNjM1Ljg2OC43NTMuNzUzIDAgMCAwIC44NzIuNjMyYy43NjYtLjE1OCAxLjU1OS0uMjMgMi4zNDgtLjIzIDMuOTYgMCA3LjczMyAxLjg2OSA5Ljk2OCA1LjA4NmEuNzUuNzUgMCAwIDAgMS4yOTkgMGMyLjIzNi0zLjIxNyA2LjAwOC01LjA4NiA5Ljk2OS01LjA4Ni43ODkgMCAxLjU4Mi4wNzIgMi4zNDkuMjNhLjc1My43NTMgMCAwIDAgLjg3MS0uNjMyLjc1My43NTMgMCAwIDAtLjYzNS0uODY3QTEyLjkxIDEyLjkxIDAgMCAwIDMyLjk2IDJDMjguNDEyIDIgMjQuMTIgNC4yNTcgMjEuNiA4SDEzLjRDMTAuODggNC4yNTcgNi41ODggMiAyLjA0IDJoMTBabTAgMTJjLTIuMjEgMC00LTEuNzktNC00czEuNzktNCA0LTQgNCAxLjc5IDQgNC0xLjc5IDQtNCA0Wm0wLTYuNWMtMS4zOCAwLTIuNSAxLjEyLTIuNSAyLjVzMS4xMiAyLjUgMi41IDIuNSAyLjUtMS4xMiAyLjUtMi41LTEuMTItMi41LTIuNS0yLjVaTTMgMTUuNTQzVjIyaDYuNDVBMTAuOTYgMTAuOTYgMCAwIDEgMyAxNS41NDNabTQzIDYuNDU3di02LjQ1N2E2LjQ3IDYuNDcgMCAwIDEtNiAxLjkxNyAxMC45ODggMTAuOTg4IDAgMCAxLTYuNDUgNC41NEg0NlYyMmgtOC40NWExMC45NiAxMC45NiAwIDAgMS02LjQ1LTQuNDU3QTYuNDcgNi40NyAwIDAgMSAyNSAxNS41NDN2Ni40NTdoMjFaIiBmaWxsPSIjMDAwIi8+PC9zdmc+" alt="Tidal" class="platform-icon">
-                        TIDAL
-                        <span class="platform-action">Play</span>
-                    </a>
-                    <a href="https://www.deezer.com/search/delanuit" class="platform-link" id="deezer-link" target="_blank">
-                        <img src="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjQiIGhlaWdodD0iMjQiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgZmlsbD0ibm9uZSI+PHBhdGggZD0iTTAgMGgyNHYyNEgweiIvPjxwYXRoIGQ9Ik0xMiAyQzYuNDggMiAyIDYuNDggMiAxMnM0LjQ4IDEwIDEwIDEwIDEwLTQuNDggMTAtMTBTMTcuNTIgMiAxMiAyem0wIDE4Yy00LjQyIDAtOC0zLjU4LTgtOHMzLjU4LTggOC04IDggMy41OCA4IDgtMy41OCA4LTggOHoiIGZpbGw9IiM2MDAyZWUiLz48cGF0aCBkPSJNOCA4aDN2OEg4eiIgZmlsbD0iIzYwMDJlZSIvPjxwYXRoIGQ9Ik0xNiA4aC0zbDIgNC41TDEzIDE2aDNsMi00LjV6IiBmaWxsPSIjNjAwMmVlIi8+PC9zdmc+" alt="Deezer" class="platform-icon">
-                        DEEZER
-                        <span class="platform-action">Play</span>
-                    </a>
                 </div>
             </div>
         </section>
@@ -195,10 +190,10 @@
         <!-- Footer con iconos sociales -->
         <footer>
             <div class="social-icons">
-                <a href="#" class="social-icon" data-aos="fade-up" data-aos-delay="100"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="social-icon" data-aos="fade-up" data-aos-delay="200"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.instagram.com/delanuittt/" class="social-icon" data-aos="fade-up" data-aos-delay="100"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.youtube.com/@DELANUIT-wb7uc" class="social-icon" data-aos="fade-up" data-aos-delay="200"><i class="fab fa-youtube"></i></a>
                 <a href="#" class="social-icon" data-aos="fade-up" data-aos-delay="300"><i class="fab fa-twitter"></i></a>
-                <a href="#" class="social-icon" data-aos="fade-up" data-aos-delay="400"><i class="fab fa-tiktok"></i></a>
+                <a href="https://www.tiktok.com/@user_delanuit" class="social-icon" data-aos="fade-up" data-aos-delay="400"><i class="fab fa-tiktok"></i></a>
             </div>
             <p class="copyright" data-aos="fade-up" data-aos-delay="500">© 2025 DELANUITT · Todos los derechos reservados</p>
         </footer>

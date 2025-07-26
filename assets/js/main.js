@@ -1,3 +1,84 @@
+// Función para generar relámpagos
+function createLightning() {
+    const container = document.getElementById('lightning-container');
+    if (!container) return;
+    
+    // Limpiar relámpagos anteriores
+    container.innerHTML = '';
+    
+    // Decidir aleatoriamente si el relámpago viene de la izquierda o de la derecha
+    const fromRight = Math.random() > 0.5;
+    
+    if (fromRight) {
+        // Crear relámpago desde la derecha
+        const startX = 70 + Math.random() * 30;  // Empezar desde el lado derecho (70%-100%)
+        const startY = Math.random() * 20;        // Comenzar cerca de la parte superior
+        
+        // Relámpagos que van hacia la izquierda
+        createBolt(container, startX, startY, 90 + (Math.random() * 40 + 100), 120 + Math.random() * 30, true);
+    } else {
+        // Crear relámpago desde la izquierda
+        const startX = Math.random() * 30;        // Empezar desde el lado izquierdo (0%-30%)
+        const startY = Math.random() * 20;        // Comenzar cerca de la parte superior
+        
+        // Relámpagos que van hacia la derecha
+        createBolt(container, startX, startY, 90 + (Math.random() * 40 - 20), 120 + Math.random() * 30, true);
+    }
+    
+    // Configurar el siguiente relámpago
+    const nextLightning = 3000 + Math.random() * 7000; // Entre 3 y 10 segundos
+    setTimeout(createLightning, nextLightning);
+}
+
+function createBolt(container, startX, startY, angle, length, isMainBolt = false) {
+    // Calcular punto final
+    const radians = angle * Math.PI / 180;
+    const endX = startX + Math.cos(radians) * length;
+    const endY = startY + Math.sin(radians) * length;
+    
+    // Crear elemento de relámpago
+    const bolt = document.createElement('div');
+    bolt.className = isMainBolt ? 'lightning main-bolt' : 'lightning branch';
+    container.appendChild(bolt);
+    
+    // Configurar posición y rotación
+    bolt.style.left = startX + '%';
+    bolt.style.top = startY + '%';
+    bolt.style.width = length + '%';
+    bolt.style.transform = `rotate(${angle}deg)`;
+    
+    // Zigzag efecto con clip-path - más pronunciado
+    const zigzags = [];
+    const segments = isMainBolt ? 12 : 6;
+    for (let i = 0; i <= segments; i++) {
+        const x = (i / segments) * 100;
+        // Zigzag más pronunciado para mayor visibilidad
+        const y = (Math.random() * 40 - 20) * (isMainBolt ? 1.2 : 0.8);
+        zigzags.push(`${x}% ${y}%`);
+    }
+    bolt.style.clipPath = `polygon(0% 0%, ${zigzags.join(', ')}, 100% 0%)`;
+    
+    // Animación
+    bolt.style.animation = `flash ${isMainBolt ? 0.8 : 0.5}s forwards`;
+    
+    // Crear ramificaciones para el relámpago principal - más ramificaciones y más grandes
+    if (isMainBolt) {
+        const branches = 3 + Math.floor(Math.random() * 4); // 3-6 ramificaciones
+        for (let i = 0; i < branches; i++) {
+            const branchStart = 20 + Math.random() * 60; // Más distribuidas a lo largo del relámpago principal
+            const branchStartX = startX + Math.cos(radians) * length * (branchStart / 100);
+            const branchStartY = startY + Math.sin(radians) * length * (branchStart / 100);
+            const branchAngle = angle + (Math.random() * 80 - 40); // ±40 grados desde el principal para mayor dispersión
+            const branchLength = 30 + Math.random() * 40; // Ramificaciones más largas, 30%-70% del tamaño original
+            
+            // Pequeño retraso para cada ramificación
+            setTimeout(() => {
+                createBolt(container, branchStartX, branchStartY, branchAngle, branchLength);
+            }, Math.random() * 100);
+        }
+    }
+}
+
 // Inicializar AOS (Animate on Scroll)
 document.addEventListener('DOMContentLoaded', () => {
     // Configuración de AOS
@@ -404,10 +485,16 @@ document.addEventListener('DOMContentLoaded', () => {
                 duration: 0.1,
                 onComplete: () => {
                     gsap.to(spotifyButton, { scale: 1, duration: 0.3 });
-                    // Aquí podrías abrir un enlace real de Spotify
-                    // window.open('https://open.spotify.com/artist/tuArtistaID', '_blank');
+                    // Abrir el enlace de Spotify
+                    const spotifyUrl = spotifyButton.getAttribute('href');
+                    if (spotifyUrl) {
+                        window.open(spotifyUrl, '_blank');
+                    }
                 }
             });
         });
     }
+    
+    // Iniciar el efecto de relámpagos
+    createLightning();
 });
