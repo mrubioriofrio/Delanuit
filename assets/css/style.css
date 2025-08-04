@@ -40,6 +40,18 @@ body {
     line-height: 1.6;
 }
 
+/* Media query para añadir más estrellas en dispositivos móviles */
+@media (max-width: 768px) {
+    body {
+        background-image: radial-gradient(white, rgba(255, 255, 255, 0.2) 2px, transparent 3px), 
+                          radial-gradient(white, rgba(255, 255, 255, 0.15) 1px, transparent 2px), 
+                          radial-gradient(white, rgba(255, 255, 255, 0.1) 1px, transparent 2px),
+                          radial-gradient(white, rgba(255, 255, 255, 0.15) 1px, transparent 2px);
+        background-size: 300px 300px, 200px 200px, 150px 150px, 100px 100px;
+        background-position: 0 0, 40px 60px, 130px 270px, 25px 160px;
+    }
+}
+
 .container {
     width: 100%;
     margin: 0 auto;
@@ -322,7 +334,7 @@ body {
 
 .music-title {
     font-family: 'Permanent Marker', cursive;
-    font-size: 3.5rem;
+    font-size: 3rem; /* Tamaño reducido de 3.5rem a 3rem */
     color: #0ff;
     display: inline-block;
     width: auto;
@@ -331,6 +343,15 @@ body {
     text-shadow: 0 0 8px rgba(0, 255, 255, 0.4);
     position: relative;
     z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.music-title .title-line {
+    display: block;
+    text-align: center;
+    margin: 0 auto;
 }
 
 .handwritten-letter {
@@ -351,23 +372,22 @@ body {
 
 @media (max-width: 576px) {
     .music-title {
-        font-size: 2.5rem;
+        font-size: 1.9rem; /* Reducir aún más el tamaño de fuente para móviles */
+        letter-spacing: -0.5px; /* Reducir espacio entre letras */
+        width: 90%; /* Asegurar que no se desborde horizontalmente */
     }
 
     .handwritten-letter {
         font-size: 0.9em;
     }
 
-    .handwritten-letter.space {
-        display: inline-block;
-        width: 0.3em;
+    .music-title .title-line {
+        margin-bottom: 5px; /* Espacio entre líneas */
     }
     
-    /* Añadir un salto de línea después de la letra 'A' de MÚSICA */
-    .handwritten-letter.space.break-mobile {
-        display: block;
-        width: 100%;
-        height: 0.8em;
+    /* Ajustamos el estilo para móviles */
+    .handwritten-letter {
+        margin: 0 -1px; /* Reducir ligeramente el margen entre letras */
     }
 }
 
