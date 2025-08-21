@@ -20,6 +20,8 @@
     <link rel="stylesheet" href="./assets/css/style.css">
 </head>
 <body>
+    <!-- Canvas de estrellas pulsantes -->
+    <canvas id="stars-canvas" class="stars-canvas"></canvas>
     <!-- Contenedor para los relámpagos -->
     <div class="lightning-container" id="lightning-container"></div>
     
@@ -198,7 +200,7 @@
                 <a href="#" class="social-icon" data-aos="fade-up" data-aos-delay="300"><i class="fab fa-twitter"></i></a>
                 <a href="https://www.tiktok.com/@user_delanuit" class="social-icon" data-aos="fade-up" data-aos-delay="400"><i class="fab fa-tiktok"></i></a>
             </div>
-            <p class="copyright" data-aos="fade-up" data-aos-delay="500">© 2025 Delanuit. Web desarrollada por Jupiter Code.
+            <p class="copyright" data-aos="fade-up" data-aos-delay="500"> 2025 Delanuit. Web desarrollada por Jupiter Code.
             <div class="developer">
                 <img src="./assets/images/Jupiter code.png" alt="Jupiter Code" class="jupiter-code">
             </div>
@@ -208,6 +210,170 @@
     <!-- Scripts -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js"></script>
+    <script>
+      (function(){
+        const canvas = document.getElementById('stars-canvas');
+        if(!canvas) return;
+        const ctx = canvas.getContext('2d', { alpha: false });
+        let dpr = Math.max(1, window.devicePixelRatio || 1);
+        let W = 0, H = 0;
+        const STAR_DENSITY_PER_100K = 18; // menos estrellas (antes 45)
+        let stars = [];
+        let shootingStars = [];
+        let nextSpawnId = null;
+        function rand(a,b){ return a + Math.random() * (b - a); }
+        function resize(){
+          dpr = Math.max(1, window.devicePixelRatio || 1);
+          const cssW = window.innerWidth;
+          const cssH = window.innerHeight;
+          W = Math.floor(cssW * dpr);
+          H = Math.floor(cssH * dpr);
+          canvas.width = W; canvas.height = H;
+          canvas.style.width = cssW + 'px';
+          canvas.style.height = cssH + 'px';
+          ctx.setTransform(1,0,0,1,0,0);
+          ctx.scale(dpr, dpr); // Escalar contexto para alta resolución
+          initStars();
+        }
+        function initStars(){
+          const areaCSSpx = (W * H) / (dpr * dpr);
+          const target = Math.round(areaCSSpx / 100000 * STAR_DENSITY_PER_100K);
+          stars = Array.from({ length: target }, () => {
+            const baseR = rand(0.3, 1.4) * dpr;
+            const isPulsating = Math.random() < 0.5; // 50% de las estrellas pulsan
+            return {
+              x: Math.random() * (W / dpr),
+              y: Math.random() * (H / dpr),
+              baseR: baseR / dpr,
+              twAmp: isPulsating ? rand(0.3, 1.0) * (baseR / dpr) : 0,
+              twSpeed: isPulsating ? rand(0.3, 0.9) : 0,
+              twPhase: rand(0, Math.PI * 2),
+              color: Math.random() < 0.8 ? '255,255,255' : '180,200,255',
+              isPulsating,
+              staticAlpha: isPulsating ? 0 : rand(0.5, 0.9)
+            };
+          });
+          shootingStars = [];
+          scheduleNextShootingStar();
+        }
+        function scheduleNextShootingStar(){
+          if (nextSpawnId) clearTimeout(nextSpawnId);
+          const delay = rand(3000, 9000); // cada 3-9s aprox
+          nextSpawnId = setTimeout(()=>{
+            spawnShootingStar();
+            scheduleNextShootingStar();
+          }, delay);
+        }
+        function spawnShootingStar(){
+          const vw = W / dpr, vh = H / dpr;
+          // Origen ligeramente fuera de pantalla para mejor efecto
+          const side = Math.random() < 0.5 ? 'left' : 'top';
+          let x, y, vx, vy;
+          if (side === 'left') {
+            x = -rand(20, 80);
+            y = rand(0, vh * 0.6);
+          } else {
+            x = rand(0, vw * 0.6);
+            y = -rand(20, 80);
+          }
+          // Velocidad en px/s (diagonal hacia abajo/derecha)
+          const speed = rand(450, 800);
+          const angle = rand(Math.PI * 0.10, Math.PI * 0.30); // ~18° a 54°
+          vx = Math.cos(angle) * speed;
+          vy = Math.sin(angle) * speed;
+          shootingStars.push({
+            x, y, vx, vy,
+            length: rand(120, 220), // longitud visual de la cola
+            life: rand(0.8, 1.6),   // vida en segundos
+            age: 0,
+            color: '255,255,255'
+          });
+        }
+        let t0 = performance.now();
+        let last = t0;
+        function draw(){
+          const now = performance.now();
+          const t = (now - t0) / 1000;
+          const dt = Math.min(0.05, (now - last) / 1000); // limitar dt para estabilidad
+          last = now;
+          // Fondo negro puro
+          ctx.fillStyle = '#000000';
+          ctx.fillRect(0, 0, W / dpr, H / dpr);
+          for(const s of stars){
+            let r, alpha;
+            if(s.isPulsating){
+              // Estrella pulsante
+              r = Math.max(0.2, s.baseR + Math.sin(t * s.twSpeed * 2 * Math.PI + s.twPhase) * s.twAmp);
+              alpha = Math.min(1, 0.6 + (r / (s.baseR + s.twAmp)) * 0.4);
+            } else {
+              // Estrella estática
+              r = s.baseR;
+              alpha = s.staticAlpha;
+            }
+            // Halo exterior
+            const g = ctx.createRadialGradient(s.x, s.y, 0, s.x, s.y, r * 4);
+            g.addColorStop(0, `rgba(${s.color},${alpha})`);
+            g.addColorStop(1, `rgba(${s.color},0)`);
+            ctx.fillStyle = g;
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, r * 4, 0, Math.PI * 2);
+            ctx.fill();
+            // Núcleo brillante
+            ctx.fillStyle = `rgba(${s.color},${Math.min(1, alpha + 0.3)})`;
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, r * 0.6, 0, Math.PI * 2);
+            ctx.fill();
+          }
+
+          // Dibujar y actualizar estrellas fugaces
+          for (let i = shootingStars.length - 1; i >= 0; i--) {
+            const s = shootingStars[i];
+            s.age += dt;
+            s.x += s.vx * dt;
+            s.y += s.vy * dt;
+            const lifeT = Math.min(1, s.age / s.life);
+            const alpha = (1 - lifeT) * 0.9; // se desvanece con la vida
+
+            // Dirección normalizada para trazo hacia atrás (cola)
+            const vlen = Math.hypot(s.vx, s.vy);
+            const dx = (s.vx / vlen);
+            const dy = (s.vy / vlen);
+            const tailX = s.x - dx * s.length * (0.6 + 0.4 * (1 - lifeT));
+            const tailY = s.y - dy * s.length * (0.6 + 0.4 * (1 - lifeT));
+
+            ctx.save();
+            // Brillo y cola
+            const grad = ctx.createLinearGradient(tailX, tailY, s.x, s.y);
+            grad.addColorStop(0, `rgba(${s.color},0)`);
+            grad.addColorStop(1, `rgba(${s.color},${alpha})`);
+            ctx.strokeStyle = grad;
+            ctx.lineWidth = 2;
+            ctx.shadowColor = `rgba(${s.color},${Math.min(0.8, alpha)})`;
+            ctx.shadowBlur = 10;
+            ctx.beginPath();
+            ctx.moveTo(tailX, tailY);
+            ctx.lineTo(s.x, s.y);
+            ctx.stroke();
+            // Cabeza brillante
+            ctx.fillStyle = `rgba(${s.color},${Math.min(1, alpha + 0.2)})`;
+            ctx.beginPath();
+            ctx.arc(s.x, s.y, 1.8, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+
+            // Retirar cuando sale de pantalla o agota vida
+            const vw = W / dpr, vh = H / dpr;
+            if (s.age > s.life || s.x > vw + 100 || s.y > vh + 100) {
+              shootingStars.splice(i, 1);
+            }
+          }
+          requestAnimationFrame(draw);
+        }
+        window.addEventListener('resize', resize);
+        resize();
+        draw();
+      })();
+    </script>
     <script src="./assets/js/main.js"></script>
-</body>
+  </body>
 </html>
